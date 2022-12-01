@@ -12,9 +12,9 @@ jobs:
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 5.0.x
+          dotnet-version: 4.7.2
       - name: Install dependencies
-        run: dotnet restore
+        run: nuget restore calculator.sln
       - name: Build
         run: dotnet build
       - name: Test
