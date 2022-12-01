@@ -14,7 +14,7 @@ jobs:
         with:
           dotnet-version: 5.0.x
       - name: Install dependencies
-        run: dotnet restore
+        run: nuget restore calculator.sln
       - name: Build
         run: dotnet build
       - name: Test
