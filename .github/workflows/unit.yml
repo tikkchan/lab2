@@ -13,5 +13,9 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 5.0.x
-      - name: tests
-        run: dotnet test ./calculator.Test/
+      - name: Install dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build
+      - name: Test
+        run: dotnet test
