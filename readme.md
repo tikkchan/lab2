@@ -1,5 +1,5 @@
 [![code checks](https://github.com/tikkchan/lab2/blob/master/.github/workflows/unit.yml)](https://github.com/tikkchan/lab2/blob/master/.github/workflows/unit.yml)
-#Тестирование приложения "Калькулятор" с помощью unit test
+#Тестирование приложения "Калькулятор" с помощью vstest
 
 ##Было реализовано 18 тестов:
 ___Тест 1.___
