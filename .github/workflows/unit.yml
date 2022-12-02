@@ -4,18 +4,15 @@ on: [push]
 
 jobs:
   build:
-
-    runs-on: windows-latest
-
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet: [ '2.1.x', '3.1.x', '5.0.x' ]
+    name: Dotnet ${{ matrix.dotnet }} sample
     steps:
       - uses: actions/checkout@v3
-      - name: Setup .NET Core SDK
+      - name: Setup dotnet
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 4.5.x
-      - name: Install dependencies
-        run: nuget restore calculator.sln
-      - name: Build
-        run: dotnet build
-      - name: Test
-        run: dotnet test ./calculator.Test/
+          dotnet-version: ${{ matrix.dotnet }}
+      - run: dotnet build <my project>
