@@ -33,4 +33,4 @@ jobs:
           msbuild.exe calculator.sln /p:platform="Any CPU" /p:configuration="Release"
         
       - name: Run Tests
-        run: vstest.console.exe .\calculator.Test\calculator.Test.dll
+        run: vstest.console.exe .\calculator.Test\calculator.Test.csproj
