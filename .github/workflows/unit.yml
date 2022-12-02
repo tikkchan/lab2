@@ -1,21 +1,36 @@
-name: dotnet package
+name: Build and Tests
 
-on: [push]
+on:  
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
-jobs:
-  build:
-
+jobs:  
+  build:    
     runs-on: windows-latest
+    
+    steps:      
+      - uses: actions/checkout@v2
+      
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1
 
-    steps:
-      - uses: actions/checkout@v3
-      - name: Setup .NET Core SDK
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: 4.7.2
-      - name: Install dependencies
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v1.0.5
+        
+      - name: Setup VSTest
+        uses: darenm/Setup-VSTest@v1
+
+      - name: Navigate to Workspace
+        run: cd $GITHUB_WORKSPACE
+
+      - name: Restore Packages
         run: nuget restore calculator.sln
-      - name: Build
-        run: dotnet build
-      - name: Test
-        run: dotnet test
+
+      - name: Build Solution
+        run: |
+          msbuild.exe calculator.sln /p:platform="Any CPU" /p:configuration="Release"
+        
+      - name: Run Tests
+        run: vstest.console.exe ./calculator.Test/calculator.Test.csproj
